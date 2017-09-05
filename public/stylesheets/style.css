@@ -60,3 +60,10 @@
 .filterable .filters input[disabled]:-ms-input-placeholder {
     color: #303;
 }
+.file {
+  visibility: hidden;
+  position: absolute;
+}
+
+.panel-default > .panel-heading-custom {
+    b

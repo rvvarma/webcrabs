@@ -2,8 +2,10 @@ var express = require('express');
 var router = express.Router();
 var path = require('path');
 var items = require('../models/items');
+var User = require('../models/user');
 var boys = require('../models/boys');
 var multer=require('multer');
+var jwt    = require('jsonwebtoken');
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploaded')
@@ -15,90 +17,166 @@ var storage = multer.diskStorage({
 
 var upload=multer({storage :storage});
 /* GET home page. */
-
-
-
 router.get('/', function(req, res, next) {
-  res.render('admin/index', { title: 'Slug' });
+  res.render('admin/index', { title: 'Slug',head :false });
 });
+router.get('/visitorform', function(req, res, next) {
+  res.render('admin/visitorform', { title: 'Slug',head :false });
+});
+router.get('/set', function(req, res, next) {
+  var nick = new User({
+     name: 'Cerminara',
+     password: 'password',
+     admin: true
+   });
+
+   // save the sample user
+   nick.save(function(err) {
+     if (err) throw err;
+
+     console.log('User saved successfully');
+     res.json({ success: true });
+   });
+});
+
+
+
+router.post('/auth', function(req, res) {
+
+  // find the user
+  User.findOne({
+    name: req.body.email
+  }, function(err, user) {
+
+    if (err) throw err;
+
+    if (!user) {
+    //  res.json({ success: false, message: 'Authentication failed. User not found.' });
+  res.render('admin/index',{head :false,success: true,message :"User not found"});
+    } else if (user) {
+
+      // check if password matches
+      if (user.password != req.body.password) {
+      //  res.json({ success: false, message: 'Authentication failed. Wrong password.' });
+  res.render('admin/index',{head :false,success: true,message :"Invalid password"});
+      } else {
+
+
+        var token = jwt.sign(user, 'scotch', {
+
+
+          expiresIn: 3600 // expires in 24 hours
+        });
+
+        // return the information including token as JSON
+
+          res.cookie('token', token);
+          res.render('admin/main',{head :true,success: true})
+        /*res.json({
+          success: true,
+          message: 'Enjoy your token!',
+          token: token
+        });*/
+      }
+
+    }
+
+  });
+});
+
+router.use(function(req, res, next) {
+
+  // check header or url parameters or post parameters for token
+  var token = req.body.token || req.query.token || req.headers['x-access-token'] || req.cookies.token;
+
+  // decode token
+  if (token) {
+
+    // verifies secret and checks exp
+    jwt.verify(token, 'scotch', function(err, decoded) {
+      if (err) {
+        return res.json({ success: false, message: 'Failed to authenticate token.' });
+      } else {
+        // if everything is good, save to request for use in other routes
+        req.decoded = decoded;
+        next();
+      }
+    });
+
+  } else {
+
+    // if there is no token
+    // return an error
+    res.render('admin/index',{head:false});
+
+  }
+});
+
+router.get('/logout', function(req, res, next) {
+  res.clearCookie("token");
+  res.render('admin/index', { title: 'Slug',head :false });
+});
+
+
+
 router.get('/main', function(req, res, next) {
-    res.render('admin/main', { title: 'Slug' });
+    res.render('admin/main', { title: 'Slug',head :true });
 });
-router.get('/cartedit', function(req, res, next) {
-    res.render('admin/edit', { title: 'Slug' });
+
+router.get('/list', function(req, res, next) {
+items.find({},null,{sort:{timestamp: 1}},function(err,docs){
+  if(err)
+  console.log(err);
+
+
+    res.render('admin/listview.hbs', { title: 'Slug' ,doc:docs,head :true});
+})
 });
+
+
+router.get('/viewprofile/:id', function(req, res, next) {
+  var a=req.params.id;
+  items.findOne({'_id':a},function(err,docs){
+
+      res.render('admin/profile', { title: 'Slug',doc:docs ,head :true});
+    //  console.log(docs);
+ });
+
+});
+
 
 router.post('/up',upload.any(),function (req,res,next) {
 new items({
-    img : req.files[0].filename,
-    Name : req.body.name,
-    price:req.body.price,
-    Tax:req.body.tax,
-    content:req.body.content,
-    category:req.body.cat,
-    availbility:req.body.ava
+  adhaarcard : req.files[0].filename,
+photocard: req.files[1].filename,
+addresscard : req.files[2].filename,
+adhaar:req.body.adhaar_number,
+person:req.body.name,
+date:req.body.date,
+address:req.body.Address,
+phonenumber:req.body.phone_number,
+email:req.body.email,
+pan:req.body.pan_nummber,
+occupation:req.body.occupation,
+visitpurpose:req.body.purpose_of_vist,
+timestamp: new Date()
 
     }).save(function (err,suc){
 
 if(err)
 {
 
-    res.render("admin/edit",{mes:"Update failed"});
+    res.render("admin/visitorform",{mes:"Update failed"});
 }
 else
 {
-    res.render("admin/edit",{mes:"sucsessfull inserted"})}
+    res.render("admin/visitorform",{mes:"sucsessfull inserted"})}
     });
 
 });
-router.get('/itemedit', function(req, res, next) {
-    items.find(function(err,docs){
-
-        res.render('admin/edititem', { title: 'Slug' ,doc: docs});
-        console.log(docs);
-    });
 
 
-});
-
-router.get('/delete/:id', function(req, res, next) {
-    items.remove({_id:req.params.id},function (err,suc) {
-        if(err){
-
-        }
-        else {
-            res.redirect('/itemedit');
-        }
-    })
-
-});
-router.post('/update', function(req, res, next) {
-console.log("hii"+req.body[0].price);
-            res.redirect('/itemedit');
 
 
-});
-router.get('/dboys',function (req,res,next) {
-    new boys({
-        Name: req.body.name,
-        Username:req.body.username,
-        PhoneNo:req.body.phoneno,
-        Email:req.body.email,
-        Defaultpassword:req.body.password,
-        VechileNumber:req.body.Vno,
-
-}).save(function (err,suc){
-
-        if(err)
-        {
-
-            res.render("admin/dboys",{mes:"Update failed"});
-        }
-        else
-        {
-            res.render("admin/dboys",{mes:"sucsessfull inserted"})}
-    });
-
-});
 
 module.exports = router;

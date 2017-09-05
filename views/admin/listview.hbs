@@ -1,0 +1,24 @@
+<div class="bs-example">
+    <table class="table">
+        <thead>
+            <tr>
+
+                <th> Name</th>
+                <th>Adhaar Number</th>
+
+                <th>Visit Time</th>
+            </tr>
+        </thead>
+        <tbody>
+          {{#doc}}
+            <tr>
+
+                <td>{{this.person}}</td>
+                  <td>{{this.adhaar}}</td>
+                <td>{{this.date}}</td>
+                <td><a href="/viewprofile/{{this._id}}">View Profile</a></td>
+        </tr>
+        {{/doc}}
+        </tbody>
+    </table>
+</div>

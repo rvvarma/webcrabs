@@ -4,14 +4,21 @@
 var mon=require('mongoose');
 //var Schema=mon.Schema;
 var scheme=new mon.Schema({
-    img:{type:String,required:true},
-    Name:{type:String,required:true},
-    price:{type:String,required:true},
-    Tax:{type:String,required:true},
-    content:{type:String,required:true},
-    category:{type:String,required:true},
-    availbility:{type:String,required:true}
+    adhaarcard:{type:String,required:true},
+    photocard:{type:String,required:true},
+    addresscard:{type:String,required:true},
+    adhaar:{type:String,required:true},
+  person:{type:String,required:true},
+    date:{type:String,required:true},
+    address:{type:String,required:true},
+    phonenumber:{type:String,required:true},
+    email:{type:String,required:true},
+    pan:{type:String,required:true},
+    occupation:{type:String,required:true},
+    visitpurpose:{type:String,required:true},
+    timestamp:{ type : Date,required:true}
+
 
 
 });
-module.exports=mon.model('items',scheme)
+module.exports=mon.model('multiitems',scheme)

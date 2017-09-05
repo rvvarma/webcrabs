@@ -10,7 +10,13 @@ $(document).on('click', '#close-preview', function(){
         }
     );
 });
-
+$(document).on('click', '.browse', function(){
+  var file = $(this).parent().parent().parent().find('.file');
+  file.trigger('click');
+});
+$(document).on('change', '.file', function(){
+  $(this).parent().find('.form-control').val($(this).val().replace(/C:\\fakepath\\/i, ''));
+});
 $(function() {
     // Create the close button
     var closebtn = $('<button/>', {
@@ -124,4 +130,13 @@ $(document).ready(function(){
     });
 
     $("[data-toggle=tooltip]").tooltip();
+});
+
+
+//view image-preview
+$(function() {
+		$('.pop').on('click', function() {
+			$('.imagepreview').attr('src', $(this).find('img').attr('src'));
+			$('#imagemodal').modal('show');
+		});
 });

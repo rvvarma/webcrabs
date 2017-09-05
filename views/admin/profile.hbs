@@ -1,0 +1,98 @@
+<div class="col-md-offset-5">
+<img src="http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png" class="img-circle" alt="Cinque Terre" width="204" height="136">
+</div>
+<br>
+
+<div class="col-md-offset-5">
+
+  <a href="#" class="btn btn-info btn-lg">
+           <span class="glyphicon glyphicon-ok"></span> Accept
+         </a>
+
+         <a href="#" class="btn btn-danger btn-lg">
+                  <span class="glyphicon glyphicon-remove"></span> Decline
+                </a>
+
+</div>
+
+
+<div class="modal-body row">
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">Visitor Details</p></div>
+      <div class="panel-body">
+
+
+
+
+
+        <p><b>Aadhar Number :</b>{{doc.adhaar}}</p>
+      <p><b>Name :</b>{{doc.person}}</p>
+    <p><b>Address :</b>{{doc.address}}</p>
+<b>DOB :</b>{{doc.date}}</p>
+<b>Phone number :</b>{{doc.phonenumber}}</p>
+<b>E-mail :</b>{{doc.email}}</p>
+<b>occupation :</b>{{doc.occupation}}</p>
+<b>Purpose of Visit :</b>{{doc.visitpurpose}}</p>
+  </div>
+    </div>
+
+  </div>
+  <div class="col-md-4">
+  <div class="panel panel-primary">
+          <div class="panel-heading">
+              <h3 class="panel-title">Adhaar card</h3>
+          </div>
+          <div class="panel-body">
+
+            <a href="#" class="pop">
+                <img src="/uploaded/{{doc.adhaarcard}}" style="width: 400px; height: 264px;" class="img-responsive">
+            </a>
+
+
+
+          </div>
+      </div>
+</div>
+
+<div class="col-md-4">
+<div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">photo</h3>
+        </div>
+        <div class="panel-body">
+
+          <a href="#" class="pop">
+              <img src="/uploaded/{{doc.photocard}}" style="width: 400px; height: 264px;" class="img-responsive">
+          </a>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" data-dismiss="modal">
+      <div class="modal-content"  >
+        <div class="modal-body">
+        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <img src="" class="imagepreview" style="width: 100%;" >
+        </div>
+        <div class="modal-footer">
+            <div class="col-xs-12">
+                 <p class="text-left"></p>
+
+            </div>
+
+        </div>
+
+
+      </div>
+    </div>
+  </div>
+
+</div>
