@@ -1,0 +1,40 @@
+<div   style="background-color: #e97319;top:-30%">
+    <span class="col-md-offset-3">  <font color="white" size="30px">
+Sri Ramatulasi Aqua Farms </font></span>
+
+<div> <p style=" padding-Left: 1000px;"> <font color="white"> CONTACT NUMBER :0000000000 </font></p>
+
+  </div>
+
+</div>
+
+<form action="/getDetails" method="post">
+<div class="row col-md-4 col-md-offset-4 col-xs-12">
+
+
+<input type="phonenumber" class="form-control" placeholder="Enter you  Mobile Number"required name="phone_number" id="n" size="0" maxlength="10" ><br>
+<button type="submit" class="btn btn-success form-control">Get Details</button>
+
+{{#if check}}
+<br>
+<br>
+<p class="col-md-offset-4" style="color:red"> Details Not found </p>
+
+{{/if}}
+</div>
+</form>
+<br><br><br><br><br><br><br><br>
+{{#if show}}
+<form>
+<div class="row col-md-4 col-md-offset-4 col-xs-12">
+<p><b> Name          :</b> {{doc.person}}</p>
+
+<p><b> Adhaar Number :</b> {{doc.adhaar}}</p>
+<label for="date">Visit Date</label>
+ <input type="Date" class="form-control" name="date" id="date" required><br>
+<input type="phonenumber" class="form-control" required placeholder="Enter OTP"name="OTP" id="n" size="0" maxlength="10" ><br>
+<button type="submit" class="btn btn-success form-control col-md-2">Submit</button>
+</div>
+
+</form>
+{{/if}}

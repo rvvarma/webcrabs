@@ -23,6 +23,26 @@ router.get('/', function(req, res, next) {
 router.get('/visitorform', function(req, res, next) {
   res.render('admin/visitorform', { title: 'Slug',head :false });
 });
+router.get('/registered', function(req, res, next) {
+  res.render('admin/registered', { title: 'Slug',head :false,show:false,check:false });
+});
+router.post('/getDetails', function(req, res, next) {
+  items.findOne({'phonenumber':req.body.phone_number},function(err,docs){
+if(docs){
+      res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:true,check:false});
+    }
+    else{
+res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:false,check:true});
+
+    }
+
+    //  console.log(docs);
+ });
+
+});
+
+
+
 router.get('/set', function(req, res, next) {
   var nick = new User({
      name: 'Cerminara',
