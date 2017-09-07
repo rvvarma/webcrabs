@@ -126,9 +126,9 @@ Sri Ramatulasi Aqua Farms </font></span>
  </br>
  <div class="col-md-offset-5">
 
-  <button type="submit" class="btn btn-primary"><font size="4px">Submit </font></button>
+  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><font size="4px">Submit </font></button>
 
-  <button type="button" class="btn btn-info"><font size="4px">Reset </font></button>
+  <button type="reset" class="btn btn-info"><font size="4px">Reset </font></button>
 </div>
  <br>
  </br>
@@ -138,3 +138,33 @@ Sri Ramatulasi Aqua Farms </font></span>
 
 </div>
 </form>
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel"></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="form-control-label">Select visit Date</label>
+            <input type="Date" class="form-control" name="date" required>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="form-control-label">Enter OTP</label>
+            <input type="text" class="form-control" id="message-text">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>
