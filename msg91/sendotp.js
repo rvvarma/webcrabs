@@ -8,14 +8,3 @@ exports.send = function(phone) {
   });
 
 };
-
-exports.send = function(phone,otp) {
-
-sendOtp.verify(phone, otp, function (error, data, response) {
-  console.log(data); // data object with keys 'message' and 'type'
-  return data;
-  //if(data.type == 'success') console.log('OTP verified successfully')
-//  if(data.type == 'error') console.log('OTP verification failed')
-});
-
-};

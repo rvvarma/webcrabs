@@ -25,16 +25,20 @@ Sri Ramatulasi Aqua Farms </font></span>
 </form>
 <br><br><br><br><br><br><br><br>
 {{#if show}}
-<form>
+<form action="/appointment" method="post">
 <div class="row col-md-4 col-md-offset-4 col-xs-12">
 <p><b> Name          :</b> {{doc.person}}</p>
 
 <p><b> Adhaar Number :</b> {{doc.adhaar}}</p>
+
 <label for="date">Visit Date</label>
+
  <input type="Date" class="form-control" name="date" id="date" required><br>
-<input type="phonenumber" class="form-control" required placeholder="Enter OTP"name="OTP" id="n" size="0" maxlength="10" ><br>
+<input type="phonenumber" class="form-control" required placeholder="Enter OTP"name="OTP" id="n" size="0" maxlength="4" ><br>
 <button type="submit" class="btn btn-success form-control col-md-2">Submit</button>
+<p>{{msg}}</p>
 </div>
 
 </form>
+
 {{/if}}

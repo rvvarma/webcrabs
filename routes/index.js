@@ -5,6 +5,7 @@ var path = require('path');
 var request = require('request');
 var items = require('../models/items');
 var SENDOTP = require('../msg91/sendotp');
+var VERIFYOTP = require('../msg91/verify');
 var User = require('../models/user');
 var boys = require('../models/boys');
 var multer=require('multer');
@@ -33,8 +34,10 @@ router.post('/getDetails', function(req, res, next) {
   items.findOne({'phonenumber':req.body.phone_number},function(err,docs){
 if(docs){
   var k='91'+req.body.phone_number;
+  console.log(k);
 var re=SENDOTP.send(k);
 res.cookie('id', docs._id);
+res.cookie('phone', k);
 
       res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:true,check:false});
 
@@ -53,16 +56,57 @@ res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:false,chec
 
 
 
-router.get('/appointment', function(req, res, next) {
+router.post('/appointment', function(req, res, next) {
   var id=req.cookies.id;
-  items.update({_id: id}, {$set: {visitdate: req.body.date}}, {w:1}, function(err) {
-  if(err)
-      throw err;
-      console.log('entry updated');
+var phone=req.cookies.phone;
+  //var datacheck=VERIFYOTP.verify(phone,req.body.OTP)
+
+  var options = {
+        url: "http://api.msg91.com/api/verifyRequestOTP.php?authkey=173983AybSxWrTwD59b4f178&mobile="+phone+"&otp="+req.body.OTP
+
+    }
+console.log(options);
+
+    request.get(options, function(error, response, body) {
+        res.set('Content-Type', 'Application/json');
+        if (!error && response.statusCode == 200) {
+           var re=JSON.parse(body);
+          var f=re.type;
+  if(f=="success"){
+
+
+
+  }
+
+  else{
+
+
+  }
+
+          //  res.status(response.statusCode).send(body);
+        } else {
+          //log.error({respose:body},response.statusCode);
+    console.log("noo"+body);
+
+        }
+    });
+
+
+  //console.log('entry updated '+datacheck);
+  items.update({_id: id},  {booked:"yes",visitdate: req.body.date}, {w:1}, function(err) {
+  if(err){
+    throw err;
+  }
+      else{
+    //  console.log('entry updated '+datacheck);
+
+
+  res.clearCookie("id");
+    res.clearCookie("phone");
+
+//res.render('admin/visitorform', { title: 'Slug',head :true });
+  }
   });
-
-
-  //  res.render('admin/main', { title: 'Slug',head :true });
 });
 
 
@@ -99,6 +143,7 @@ email:req.body.email,
 pan:req.body.pan_nummber,
 occupation:req.body.occupation,
 booked:"no",
+visitdate:"no",
 visitpurpose:req.body.purpose_of_vist,
 timestamp: new Date()
 
