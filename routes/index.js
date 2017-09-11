@@ -1,7 +1,10 @@
+
 var express = require('express');
 var router = express.Router();
 var path = require('path');
+var request = require('request');
 var items = require('../models/items');
+var SENDOTP = require('../msg91/sendotp');
 var User = require('../models/user');
 var boys = require('../models/boys');
 var multer=require('multer');
@@ -29,9 +32,16 @@ router.get('/registered', function(req, res, next) {
 router.post('/getDetails', function(req, res, next) {
   items.findOne({'phonenumber':req.body.phone_number},function(err,docs){
 if(docs){
+  var k='91'+req.body.phone_number;
+var re=SENDOTP.send(k);
+res.cookie('id', docs._id);
+
       res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:true,check:false});
+
     }
     else{
+
+
 res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:false,check:true});
 
     }
@@ -40,6 +50,21 @@ res.render('admin/registered', {title:'Slug',doc:docs,head:false,show:false,chec
  });
 
 });
+
+
+
+router.get('/appointment', function(req, res, next) {
+  var id=req.cookies.id;
+  items.update({_id: id}, {$set: {visitdate: req.body.date}}, {w:1}, function(err) {
+  if(err)
+      throw err;
+      console.log('entry updated');
+  });
+
+
+  //  res.render('admin/main', { title: 'Slug',head :true });
+});
+
 
 
 
@@ -59,7 +84,37 @@ router.get('/set', function(req, res, next) {
    });
 });
 
+router.post('/up',upload.any(),function (req,res,next) {
 
+new items({
+  adhaarcard : req.files[0].filename,
+photocard: req.files[1].filename,
+addresscard : req.files[2].filename,
+adhaar:req.body.adhaar_number,
+person:req.body.name,
+date:req.body.date,
+address:req.body.Address,
+phonenumber:req.body.phone_number,
+email:req.body.email,
+pan:req.body.pan_nummber,
+occupation:req.body.occupation,
+booked:"no",
+visitpurpose:req.body.purpose_of_vist,
+timestamp: new Date()
+
+    }).save(function (err,suc){
+
+if(err)
+{
+
+    res.render("admin/visitorform",{mes:"Update failed"});
+}
+else
+{
+    res.render("admin/visitorform",{mes:"sucsessfull inserted"})}
+    });
+
+});
 
 router.post('/auth', function(req, res) {
 
@@ -139,6 +194,69 @@ router.get('/logout', function(req, res, next) {
 
 
 
+
+router.get('/employee', function(req, res, next) {
+  boys.find({},function(err,docs){
+    if(err)
+    console.log(err);
+
+
+      res.render('admin/employee', { title: 'Slug',head :true,doc:docs });
+  })
+
+});
+
+
+
+router.get('/employee/delete/:id', function(req, res, next) {
+  console.log(req.params.id);
+  boys.remove({"_id":req.params.id},function(err,docs){
+    if(err)
+    console.log(err);
+
+console.log("checkk"+docs)
+      res.redirect('/employee');
+  })
+
+});
+
+
+
+router.post('/saveemployee', function(req, res, next) {
+
+  new boys({
+    Adhaar:req.body.adhaar,
+    Name:req.body.name,
+    join:req.body.date,
+    type:req.body.type,
+    Phone:req.body.phone
+
+
+  }).save(function (err,suc){
+
+if(err)
+{
+  boys.find({},function(err,docs){
+    if(err)
+    console.log(err);
+  res.render("admin/employee",{mes:"Update failed",doc:docs,head :true});
+})}
+else
+{
+  boys.find({},function(err,docs){
+    if(err)
+    console.log(err);
+  res.render("admin/employee",{mes:"sucsessfull inserted",doc:docs,head :true});
+})
+
+
+}
+  });
+
+});
+
+
+
 router.get('/main', function(req, res, next) {
     res.render('admin/main', { title: 'Slug',head :true });
 });
@@ -165,35 +283,7 @@ router.get('/viewprofile/:id', function(req, res, next) {
 });
 
 
-router.post('/up',upload.any(),function (req,res,next) {
-new items({
-  adhaarcard : req.files[0].filename,
-photocard: req.files[1].filename,
-addresscard : req.files[2].filename,
-adhaar:req.body.adhaar_number,
-person:req.body.name,
-date:req.body.date,
-address:req.body.Address,
-phonenumber:req.body.phone_number,
-email:req.body.email,
-pan:req.body.pan_nummber,
-occupation:req.body.occupation,
-visitpurpose:req.body.purpose_of_vist,
-timestamp: new Date()
 
-    }).save(function (err,suc){
-
-if(err)
-{
-
-    res.render("admin/visitorform",{mes:"Update failed"});
-}
-else
-{
-    res.render("admin/visitorform",{mes:"sucsessfull inserted"})}
-    });
-
-});
 
 
 

@@ -16,6 +16,7 @@ var scheme=new mon.Schema({
     pan:{type:String,required:true},
     occupation:{type:String,required:true},
     visitpurpose:{type:String,required:true},
+    booked:{type:String,required:true},
     timestamp:{ type : Date,required:true}
 
 

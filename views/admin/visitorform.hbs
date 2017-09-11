@@ -9,7 +9,7 @@ Sri Ramatulasi Aqua Farms </font></span>
   </div>
   <div class="container">
     <div class="col-md-12">
-
+ {{{flash}}}
   <h1 style="font-size:50px" class="col-md-offset-4"> Visitor Form <a type="button" href="/registered" class="btn btn-info col-md-offset-4">Already Regsitered</a></h1>
 </div>
 </div>
@@ -18,7 +18,7 @@ Sri Ramatulasi Aqua Farms </font></span>
 
     <tbody>
       <tr>
-        <td>Aadhar Number :</td>
+        <td>Adhaar Number :</td>
         <td> <textarea class="form-control" required rows="1" name="adhaar_number" size="0" maxlength="16" ></textarea>
         </td>
       </tr>
@@ -126,7 +126,7 @@ Sri Ramatulasi Aqua Farms </font></span>
  </br>
  <div class="col-md-offset-5">
 
-  <button type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"><font size="4px">Submit </font></button>
+  <button type="submit" class="btn btn-primary"><font size="4px">Submit </font></button>
 
   <button type="reset" class="btn btn-info"><font size="4px">Reset </font></button>
 </div>
@@ -168,3 +168,34 @@ Sri Ramatulasi Aqua Farms </font></span>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<tr>
+<th>name</th>
+<th>username</th>
+<th>phoneno</th>
+<th>password</th>
+<th>vno</th>
+</tr>
+<tr ng-repeat="response in my">
+<td>{{response.name}}</td>
+<td>{{response.usename}}</td>
+<td>{{response.phoneno}}</td>
+<td>{{response.password}}</td>
+<td>{{response.vno}}</td>
+</tr>
+</div>
+
+</table>

@@ -1,16 +1,11 @@
-/**
- * Created by Nani on 7/8/2017.
- */
-var mon=require('mongoose');
-//var Schema=mon.Schema;
-var scheme=new mon.Schema({
-    Username:{type:String,required:true},
+var mongoose = require('mongoose');
+var Schema = mongoose.Schema;
+
+// set up a mongoose model and pass it using module.exports
+module.exports = mongoose.model('employee', new Schema({
     Name:{type:String,required:true},
-    VechileNumber:{type:String,required:true},
-    PhoneNo:{type:String,required:true},
-DefaultPassword:{type:String,required:true},
-Email:{type:String,required:true}
-
-
-});
-module.exports=mon.model('boys',scheme)
+    Phone:{type:String,required:true},
+    Adhaar:{type:String,required:true},
+    join:{type:String,required:true},
+    type:{type:String,required:true}
+}));
