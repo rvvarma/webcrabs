@@ -30,6 +30,12 @@ router.get('/visitorform', function(req, res, next) {
 router.get('/registered', function(req, res, next) {
   res.render('admin/registered', { title: 'Slug',head :false,show:false,check:false });
 });
+
+router.get('/resendotp', function(req, res, next) {
+
+  next();
+//  res.render('admin/registered', { title: 'Slug',head :false,show:false,check:false });
+});
 router.post('/getDetails', function(req, res, next) {
   items.findOne({'phonenumber':req.body.phone_number},function(err,docs){
 if(docs){
@@ -70,20 +76,47 @@ console.log(options);
     request.get(options, function(error, response, body) {
         res.set('Content-Type', 'Application/json');
         if (!error && response.statusCode == 200) {
+          res.set({"Content-Type": "text/html"});
            var re=JSON.parse(body);
           var f=re.type;
-  if(f=="success"){
+          console.log("hii"+f);
+if(f=="success")
+{
+  items.update({_id: id},  {booked:"yes",visitdate: req.body.date}, {w:1}, function(err) {
+      if(err){
+        throw err;
+        res.send("hi");
+      }
+          else{
+      res.clearCookie("id");
+        res.clearCookie("phone");
+
+  res.render('admin/registered', { title: 'Slug',head :false,msg:"successfully submited your request",show:true });
+}
+});
+
+
+}
+
+
+else{
+
+  items.findOne({'phonenumber':phone},function(err,docs){
+  if(docs){
+  res.render('admin/registered', { title: 'Slug',head :false,msg:"Invalid OTP try again",show:true,doc:docs });
+}
+else{
+
+    res.render('admin/registered', { title: 'Slug',head :false,msg:"Invalid OTP try again",show:true});
+}
+});
+}
 
 
 
-  }
-
-  else{
 
 
-  }
-
-          //  res.status(response.statusCode).send(body);
+  //  res.status(response.statusCode).send(body);
         } else {
           //log.error({respose:body},response.statusCode);
     console.log("noo"+body);
