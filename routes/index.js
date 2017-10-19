@@ -306,7 +306,8 @@ router.post('/saveemployee', function(req, res, next) {
     Adhaar:req.body.adhaar,
     Name:req.body.name,
     join:req.body.date,
-    type:req.body.type,
+	username:req.body.username,
+	pass:req.body.pass,
     Phone:req.body.phone
 
 
@@ -359,7 +360,17 @@ router.get('/viewprofile/:id', function(req, res, next) {
  });
 
 });
+//client detilas of registered
 
+router.get('/clientdetials', function(req, res, next) {
+  
+  items.findOne({'_id':a},function(err,docs){
+
+      res.render('admin/profile', { title: 'Slug',doc:docs ,head :true});
+    //  console.log(docs);
+ });
+
+});
 
 
 

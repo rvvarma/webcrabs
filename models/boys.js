@@ -7,5 +7,7 @@ module.exports = mongoose.model('employee', new Schema({
     Phone:{type:String,required:true},
     Adhaar:{type:String,required:true},
     join:{type:String,required:true},
-    type:{type:String,required:true}
+	username:{type:String,required:true},
+password:{type:String,required:true}
+    
 }));
