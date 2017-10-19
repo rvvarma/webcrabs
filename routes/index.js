@@ -10,6 +10,9 @@ var User = require('../models/user');
 var boys = require('../models/boys');
 var multer=require('multer');
 var jwt    = require('jsonwebtoken');
+var mongoose=require('mongoose')
+var connection = mongoose.connection;
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploaded')
@@ -363,14 +366,35 @@ router.get('/viewprofile/:id', function(req, res, next) {
 //client detilas of registered
 
 router.get('/clientdetials', function(req, res, next) {
-  
-  items.findOne({'_id':a},function(err,docs){
 
-      res.render('admin/profile', { title: 'Slug',doc:docs ,head :true});
-    //  console.log(docs);
- });
+  connection.db.collection("clients", function(err, collection){
+          collection.find({}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody); // it will print your collection data
+//console.log(data.requestBody);
+      res.render('admin/client', { title: 'Slug',doc:data ,head :true});
+          })
+      });
 
 });
+router.get('/farmer/:id', function(req, res, next) {
+var id=req.params.id;
+  connection.db.collection("clients", function(err, collection){
+          collection.find({'_id':id}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody); // it will print your collection data
+//console.log(data.requestBody);
+
+
+
+      res.render('admin/farmer', { title: 'Slug',doc:data ,head :true});
+          })
+      });
+
+    //  console.log(docs);
+
+
+});
+
+
 
 
 
