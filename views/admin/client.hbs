@@ -36,10 +36,12 @@
                       <td>{{this.requestBody.profile.DOB}}</td>
                       <td>{{this.requestBody.profile.address}}</td>
                       {{#if this.requestBody.farmer_b}}
-                                            <td><a href="/farmer/{{this._id}}">Farmer</a></td>
+                                            <td><a href="/farmer/{{this._id}}">Yes</a></td>
+                                            {{else}}
+                                              <td><a href="#">No</a></td>
                                             {{/if}}
 {{#if this.requestBody.supplier_b}}
-                                            <td><a href="#">Supplier</a></td>
+                                            <td><a href="/supplier/{{this._id}}">Supplier</a></td>
                                             {{/if}}
                     </tr>
                     {{/doc}}

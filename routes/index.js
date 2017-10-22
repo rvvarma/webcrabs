@@ -12,7 +12,7 @@ var multer=require('multer');
 var jwt    = require('jsonwebtoken');
 var mongoose=require('mongoose')
 var connection = mongoose.connection;
-
+var BSON = require('bson')
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, './public/uploaded')
@@ -378,11 +378,12 @@ router.get('/clientdetials', function(req, res, next) {
 });
 router.get('/farmer/:id', function(req, res, next) {
 var id=req.params.id;
+var o_id = new BSON.ObjectID(id);
   connection.db.collection("clients", function(err, collection){
-          collection.find({'_id':id}).toArray(function(err, data){
+          collection.find({'_id':o_id}).toArray(function(err, data){
               var docs=JSON.stringify(data.requestBody); // it will print your collection data
 //console.log(data.requestBody);
-
+console.log(data)
 
 
       res.render('admin/farmer', { title: 'Slug',doc:data ,head :true});
@@ -394,6 +395,43 @@ var id=req.params.id;
 
 });
 
+router.get('/farmer/:id', function(req, res, next) {
+var id=req.params.id;
+var o_id = new BSON.ObjectID(id);
+  connection.db.collection("clients", function(err, collection){
+          collection.find({'_id':o_id}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody); // it will print your collection data
+//console.log(data.requestBody);
+console.log(data)
+
+
+      res.render('admin/farmer', { title: 'Slug',doc:data ,head :true});
+          })
+      });
+
+    //  console.log(docs);
+
+
+});
+
+router.get('/supplier/:id', function(req, res, next) {
+var id=req.params.id;
+var o_id = new BSON.ObjectID(id);
+  connection.db.collection("clients", function(err, collection){
+          collection.find({'_id':o_id}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody); // it will print your collection data
+//console.log(data.requestBody);
+//console.log(data)
+
+
+      res.render('admin/supplier', { title: 'Slug',doc:data ,head :true});
+          })
+      });
+
+    //  console.log(docs);
+
+
+});
 
 
 

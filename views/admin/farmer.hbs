@@ -1,16 +1,103 @@
-<div class="col-md-offset-5">
-<img src="data:image/jpeg;base64,{{doc.requestBody.profile.photo}}" alt="red hot">
-</div>
-<br>
+{{#doc}}
 
-<div class="col-md-offset-5">
 
-  <a href="#" class="btn btn-info btn-lg">
-           <span class="glyphicon glyphicon-ok"></span> Accept
-         </a>
+<div class="modal-body row">
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
 
-         <a href="#" class="btn btn-danger btn-lg">
-                  <span class="glyphicon glyphicon-remove"></span> Decline
-                </a>
+      <div class="panel-heading">Farmer Details</p></div>
+      <div class="panel-body">
+        <p><b>Mobile Number :</b>{{this.requestBody.farmer.alt_mobile}}</p>
+      <p><b>Occupation :</b>{{this.requestBody.farmer.occupation}}</p>
+    <p><b>Farming capacity :</b>{{this.requestBody.farmer.farm_capacity}}</p>
 
-</div>
+  </div>
+    </div>
+    </div>
+
+
+
+      <div class="col-md-4">
+        <!-- Your first column here -->
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">Farmering experiance in aqua culture</p></div>
+          <div class="panel-body">
+            <p><b>Fish culture :</b>Area : {{this.requestBody.farmer.fish_acreas}}  years : {{this.requestBody.farmer.fish_years}}</p>
+          <p><b>MudCrab Culture :</b>Area : {{this.requestBody.farmer.mudcrab_acres}}  years : {{this.requestBody.farmer.mudcrab_years}}</p>
+         <p><b>SHRIMP culture :</b>Area : {{this.requestBody.farmer.shr_acrs}}  years : {{this.requestBody.farmer.shr_years}}</p>
+
+      </div>
+        </div>
+        </div>
+
+
+
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">Farmer Area</p></div>
+      <div class="panel-body">
+        <p><b>Farming Area :</b>{{this.requestBody.farmer.total_farming_area}}</p>
+      <p><b>Owned :</b>{{this.requestBody.farmer.own_acres}}</p>
+    <p><b>Leased :</b>{{this.requestBody.farmer.leased_area}}</p>
+
+  </div>
+    </div>
+    </div>
+
+
+
+
+
+<div class="modal-body row">
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">Seed in Farms</p></div>
+      <div class="panel-body">
+        <p><b>Mobile Number :</b>{{this.requestBody.farmer.total_famrming_bags}}</p>
+      <p><b>Occupation :</b>{{this.requestBody.farmer.own_seed_num}}</p>
+    <p><b>Farming capacity :</b>{{this.requestBody.farmer.sponsered_seed_num}}</p>
+
+  </div>
+    </div>
+    </div>
+
+
+
+      <div class="col-md-4">
+        <!-- Your first column here -->
+        <div class="panel panel-primary">
+
+          <div class="panel-heading">Farmers Location</p></div>
+          <div class="panel-body">
+            <p><b>Village :</b>{{this.requestBody.farmer.village}}   <b>    Pincode :</b>{{this.requestBody.farmer.pincode}} </p>
+          <p><b>Mandal :</b>{{this.requestBody.farmer.mandal}}  <b>State :</b>{{this.requestBody.farmer.state}}</p>
+         <p><b>District :</b> {{this.requestBody.farmer.district}}
+         </p>
+
+      </div>
+        </div>
+        </div>
+
+
+
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading">Water Resources</p></div>
+      <div class="panel-body">
+        <p><b>Salinity % :</b> MIN :{{this.requestBody.farmer.min_salinity}} MAX :{{this.requestBody.farmer.max_salinity}}</p>
+      <p><b>Water :</b>{{this.requestBody.farmer.selected_water_type}}</p>
+    <p><b>Motors :</b>{{this.requestBody.farmer.select_motor_type}}</p>
+
+  </div>
+    </div>
+    </div>
+
+  {{/doc}}
