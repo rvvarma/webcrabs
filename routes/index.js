@@ -434,6 +434,26 @@ var o_id = new BSON.ObjectID(id);
 });
 
 
+router.get('/buyer/:id', function(req, res, next) {
+var id=req.params.id;
+var o_id = new BSON.ObjectID(id);
+  connection.db.collection("clients", function(err, collection){
+          collection.find({'_id':o_id}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody); // it will print your collection data
+//console.log(data.requestBody);
+//console.log(data)
+
+
+      res.render('admin/buyer', { title: 'Slug',doc:data ,head :true});
+          })
+      });
+
+    //  console.log(docs);
+
+
+});
+
+
 
 
 
