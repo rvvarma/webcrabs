@@ -19,6 +19,7 @@
                     <th><input type="text" class="form-control" placeholder="Gender"></th>
                     <th><input type="text" class="form-control" placeholder="Date Of Birth"></th>
                     <th><input type="text" class="form-control" placeholder="Address"></th>
+                     <th><input type="text" class="form-control" placeholder="Completed By"></th>
                     <th><input type="text" class="form-control" placeholder="Farmer"></th>
                     <th><input type="text" class="form-control" placeholder="Supplier"></th>
                     <th><input type="text" class="form-control" placeholder="Buyer"></th>
@@ -36,6 +37,7 @@
                       <td>{{this.requestBody.profile.Gender}}</td>
                       <td>{{this.requestBody.profile.DOB}}</td>
                       <td>{{this.requestBody.profile.address}}</td>
+                      <td>{{this.requestBody.completed_by}}</td>
                       {{#if this.requestBody.farmer_b}}
                                             <td><a href="/farmer/{{this._id}}">Yes</a></td>
                                             {{else}}

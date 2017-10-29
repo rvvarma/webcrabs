@@ -1,63 +1,218 @@
+{{#doc}}
+<div class="modal-body row">
 
-<div class="container">
-<P>{{mes}}</p>
-    <div class="row">
-        <div class="panel panel-primary filterable">
-            <div class="panel-heading">
+ <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading"  style="background-color: #e97319">Personal Details</p></div>
+      <div class="panel-body">
+        <p><b>Name :</b>{{this.requestBody.profile.Name}}</p>
+      <p><b>DOB :</b>{{this.requestBody.profile.DOB}}</p>
+    <p><b>Gender :</b>{{this.requestBody.profile.Gender}}</p>
+    <p><b>address :</b>{{this.requestBody.profile.address}}</p>
+
+  </div>
+    </div>
+
+    </div>
 
 
-                <div class="pull-right">
-                    <button class="btn btn-default btn-xs btn-filter"><span class="glyphicon glyphicon-filter"></span> Filter</button>
-                </div>
-            </div>
-            <table class="table">
-                <thead>
-                <tr class="filters">
-                    <th><input type="text" class="form-control" placeholder="Name"></th>
+<div class="col-md-4">
+<img src="data:image/png;base64,{{this.requestBody.profile.photo}}" class="img-circle col-md-offset-2" alt="Cinque Terre" width="204" height="136">
+    <div class="panel panel-primary">
 
-                    <th><input type="text" class="form-control" placeholder="Phone Number"></th>
-                    <th><input type="text" class="form-control" placeholder="Gender"></th>
-                    <th><input type="text" class="form-control" placeholder="Date Of Birth"></th>
-                    <th><input type="text" class="form-control" placeholder="Address"></th>
-                    <th><input type="text" class="form-control" placeholder="Farmer"></th>
-                    <th><input type="text" class="form-control" placeholder="Supplier"></th>
-                    <th><input type="text" class="form-control" placeholder="Buyer"></th>
+          <div class="panel-heading"  style="background-color: #e97319">Payment Terms</p></div>
+          <div class="panel-body">
+            <p><b>Payment Type :</b>{{this.requestBody.buyer.payment_type}}</p>
+          <p><b>No of Times :</b>{{this.requestBody.buyer.payment_times}}</p>
 
+
+      </div>
+        </div>
+
+</div>
+
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading"  style="background-color: #e97319">Buyer Details</p></div>
+      <div class="panel-body">
+        <p><b>Company Type :</b>{{this.requestBody.buyer.Company_type}}</p>
+      <p><b>Company Name :</b>{{this.requestBody.buyer.Company_name}}</p>
+    <p><b>Authorized person :</b>{{this.requestBody.buyer.auth_name}}</p>
+    <p><b>Address :</b>{{this.requestBody.buyer.street}}.{{this.requestBody.buyer.City}},{{this.requestBody.buyer.state}},{{this.requestBody.buyer.Country}},{{this.requestBody.buyer.zipcode}}</p>
+ <p><b>Phone 1 :</b>{{this.requestBody.buyer.Phone_1}}</p>
+ <p><b>Phone 2 :</b>{{this.requestBody.buyer.Phone_2}}</p>
+ <p><b>Fax No:</b>{{this.requestBody.buyer.Fax_No}}</p>
+  </div>
+    </div>
+    </div>
+
+
+
+</div>
+<br>
+
+<div class="modal-body row">
+
+
+
+
+      <div class="col-md-12">
+        <!-- Your first column here -->
+        <div class="panel panel-primary">
+
+          <div class="panel-heading"  style="background-color: #e97319">Buyer History in Crab Products :</p></div>
+          <div class="panel-body">
+  <div id="tablePanelBody" class="panel-body">
+            <table class="table table-bordered table-hover specialCollapse">
+            <tr>
+            <th>Name</th>
+            <th>Turn Over Per Anum</th>
+            <th>Trading from Years</th>
+            <th>Required Quantity Per Week</th>
+            </tr>
+                <tr>
+                <td>Mud Crab – Medium</td>
+                <td>{{this.requestBody.buyer.Mud_Crab_M.Turn_over}}</td>
+                 <td>{{this.requestBody.buyer.Mud_Crab_M.Trading_from}}</td>
+                  <td>{{this.requestBody.buyer.Mud_Crab_M.per_week}}</td>
 
 
                 </tr>
-                </thead>
-                <tbody>
-                 {{#doc}}
+                  <tr>
+                                <td>Mud Crab – Big</td>
+                                <td>{{this.requestBody.buyer.Mud_Crab_Big.Turn_over}}</td>
+                                 <td>{{this.requestBody.buyer.Mud_Crab_Big.Trading_from}}</td>
+                                  <td>{{this.requestBody.buyer.Mud_Crab_Big.per_week}}</td>
+
+
+                                </tr>
+                  <tr>
+                                <td>Mud Crab - XL</td>
+                                <td>{{this.requestBody.buyer.Mud_Crab_XL.Turn_over}}</td>
+                                 <td>{{this.requestBody.buyer.Mud_Crab_XL.Trading_from}}</td>
+                                  <td>{{this.requestBody.buyer.Mud_Crab_XL.per_week}}</td>
+
+
+                                </tr>
                     <tr>
+                                  <td>Mud Crab - XXL</td>
+                                  <td>{{this.requestBody.buyer.Mud_Crab_XXL.Turn_over}}</td>
+                                   <td>{{this.requestBody.buyer.Mud_Crab_XXL.Trading_from}}</td>
+                                    <td>{{this.requestBody.buyer.Mud_Crab_XXL.per_week}}</td>
 
-                      <td>{{this.requestBody.profile.Name}}</td>
-                      <td></td>
-                      <td>{{this.requestBody.profile.Gender}}</td>
-                      <td>{{this.requestBody.profile.DOB}}</td>
-                      <td>{{this.requestBody.profile.address}}</td>
-                      {{#if this.requestBody.farmer_b}}
-                                            <td><a href="/farmer/{{this._id}}">Yes</a></td>
-                                            {{else}}
-                                              <td><a href="#">No</a></td>
-                                            {{/if}}
-{{#if this.requestBody.supplier_b}}
-                                            <td><a href="/supplier/{{this._id}}">yes</a></td>
-                                            {{else}}
-                                              <td><a href="#">No</a></td>
-                                            {{/if}}
-                        {{#if this.requestBody.buyer_b}}
-                                                                    <td><a href="/supplier/{{this._id}}">yes</a></td>
-                                                                    {{else}}
-                                                                      <td><a href="#">No</a></td>
-                                                                    {{/if}}
 
-                    </tr>
-                    {{/doc}}
-                </tbody>
+                                  </tr>
+                   <tr>
+                                 <td>Mud Crab - OL</td>
+                                 <td>{{this.requestBody.buyer.Mud_Crab_OL.Turn_over}}</td>
+                                  <td>{{this.requestBody.buyer.Mud_Crab_OL.Trading_from}}</td>
+                                   <td>{{this.requestBody.buyer.Mud_Crab_OL.per_week}}</td>
+
+
+                                 </tr>
+
+
+                     <tr>
+                                   <td>Red Crab – Live</td>
+                                   <td>{{this.requestBody.buyer.Red_Crab_ALive.Turn_over}}</td>
+                                    <td>{{this.requestBody.buyer.Red_Crab_ALive.Trading_from}}</td>
+                                     <td>{{this.requestBody.buyer.Red_Crab_ALive.per_week}}</td>
+
+
+                                   </tr>
+
+
+                 <tr>
+                               <td>Soft-shell Crab</td>
+                               <td>{{this.requestBody.buyer.Soft_Shell_Crab.Turn_over}}</td>
+                                <td>{{this.requestBody.buyer.Soft_Shell_Crab.Trading_from}}</td>
+                                 <td>{{this.requestBody.buyer.Soft_Shell_Crab.per_week}}</td>
+
+
+                               </tr>
+                 <tr>
+                               <td>Crab Meat</td>
+                               <td>{{this.requestBody.buyer.Crab_Meat.Turn_over}}</td>
+                                <td>{{this.requestBody.buyer.Crab_Meat.Trading_from}}</td>
+                                 <td>{{this.requestBody.buyer.Crab_Meat.per_week}}</td>
+
+
+                               </tr>
+
+
+
+
+
+
+
+
+
+
             </table>
-
         </div>
-    </div>
+
+      </div>
+        </div>
+        </div>
+
+
+
+
+
+
 </div>
 
+
+<div class="modal-body row">
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading"  style="background-color: #e97319">Financial Details</p></div>
+      <div class="panel-body">
+        <p><b>TAX NO :</b>{{this.requestBody.buyer.Tax_No}}</p>
+      <p><b>GST NO :</b>{{this.requestBody.buyer.GST_No}}</p>
+    <p><b>PAN NO :</b>{{this.requestBody.buyer.Pan_No}}</p>
+
+  </div>
+    </div>
+    </div>
+
+
+
+      <div class="col-md-4">
+        <!-- Your first column here -->
+        <div class="panel panel-primary">
+
+          <div class="panel-heading"  style="background-color: #e97319">Bank Details</p></div>
+          <div class="panel-body">
+            <p><b>Bank Name :</b>{{this.requestBody.buyer.bank_name}} </p>
+          <p><b>Account No :</b>{{this.requestBody.buyer.bank_acc}}  </p>
+         <p><b>IFSC code :</b> {{this.requestBody.buyer.bank_ifsc}}
+         </p>
+
+      </div>
+        </div>
+        </div>
+
+
+
+  <div class="col-md-4">
+    <!-- Your first column here -->
+    <div class="panel panel-primary">
+
+      <div class="panel-heading"  style="background-color: #e97319">Shipment Terms</p></div>
+      <div class="panel-body">
+        <p><b>Shipment Type :</b> {{this.requestBody.buyer.ship_type}}  <b style="margin-left:5%">Local Grader  :</b>{{this.requestBody.buyer.local_grader}}</p>
+      <p><b>Shipment Times :</b>{{this.requestBody.buyer.ship_times}}</p>
+    <p><b>Rate Card :</b>{{this.requestBody.buyer.rate_card}}   <b style="margin-left:5%">Local Collector  :</b>{{this.requestBody.buyer.local_collector}}</p>
+
+  </div>
+    </div>
+    </div>
+
+  {{/doc}}

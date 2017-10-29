@@ -344,24 +344,28 @@ router.get('/main', function(req, res, next) {
 });
 
 router.get('/list', function(req, res, next) {
-items.find({},null,{sort:{timestamp: 1}},function(err,docs){
-  if(err)
-  console.log(err);
+ connection.db.collection("visitorsdatas", function(err, collection){
+          collection.find({}).toArray(function(err, data){
+              var docs=JSON.stringify(data.requestBody);
 
-
-    res.render('admin/listview.hbs', { title: 'Slug' ,doc:docs,head :true});
+//console.log(data);
+    res.render('admin/listview.hbs', { title: 'Slug' ,doc:data,head :true});
 })
 });
-
+});
 
 router.get('/viewprofile/:id', function(req, res, next) {
-  var a=req.params.id;
-  items.findOne({'_id':a},function(err,docs){
+ var id=req.params.id;
+ var o_id = new BSON.ObjectID(id);
+   connection.db.collection("visitorsdatas", function(err, collection){
+           collection.find({'_id':o_id}).toArray(function(err, data){
+               var docs=JSON.stringify(data.requestBody); // it will print your collection data
 
-      res.render('admin/profile', { title: 'Slug',doc:docs ,head :true});
+console.log("funny"+data)
+      res.render('admin/profile', { title: 'Slug',doc:data ,head :true});
     //  console.log(docs);
  });
-
+});
 });
 //client detilas of registered
 

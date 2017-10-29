@@ -1,5 +1,6 @@
+{{#doc}}
 <div class="col-md-offset-5">
-<img src="http://enadcity.org/enadcity/wp-content/uploads/2017/02/profile-pictures.png" class="img-circle" alt="Cinque Terre" width="204" height="136">
+<img src="data:image/png;base64,{{this.requestBody.photo}}"  class="img-circle" alt="Cinque Terre" width="204" height="136">
 </div>
 <br>
 
@@ -21,78 +22,59 @@
     <!-- Your first column here -->
     <div class="panel panel-primary">
 
-      <div class="panel-heading">Visitor Details</p></div>
+      <div class="panel-heading" style="background-color: #e97319">Visitor Details</p></div>
       <div class="panel-body">
 
-
-
-
-
-        <p><b>Aadhar Number :</b>{{doc.adhaar}}</p>
-      <p><b>Name :</b>{{doc.person}}</p>
-    <p><b>Address :</b>{{doc.address}}</p>
-<b>DOB :</b>{{doc.date}}</p>
-<b>Phone number :</b>{{doc.phonenumber}}</p>
-<b>E-mail :</b>{{doc.email}}</p>
-<b>occupation :</b>{{doc.occupation}}</p>
-<b>Purpose of Visit :</b>{{doc.visitpurpose}}</p>
+        <p><b>Aadhar Number :</b>{{this.requestBody.profile.Adhaar}}</p>
+      <p><b>Name :</b>{{this.requestBody.profile.name}}</p>
+    <p><b>Phone Number :</b>{{this.requestBody.profile.phone}}</p>
+<b>DOB :</b>{{this.requestBody.profile.DOB}}</p>
+<b>E-mail :</b>{{this.requestBody.profile.email}}</p>
+<b>occupation :</b>{{this.requestBody.profile.occupation}}</p>
+<b>Present Address :</b>{{this.requestBody.profile.street}},{{this.requestBody.profile.city}},{{this.requestBody.profile.state}},{{this.requestBody.profile.country}},{{this.requestBody.profile.zipcode}}</p>
   </div>
     </div>
 
   </div>
   <div class="col-md-4">
   <div class="panel panel-primary">
-          <div class="panel-heading">
+          <div class="panel-heading" style="background-color: #e97319">
               <h3 class="panel-title">Adhaar card</h3>
           </div>
           <div class="panel-body">
 
-            <a href="#" class="pop">
-                <img src="/uploaded/{{doc.adhaarcard}}" style="width: 400px; height: 264px;" class="img-responsive">
-            </a>
-
+           <p><b>Name :</b>{{this.requestBody.name}}</p>
+           <p><b>SEX :</b>{{this.requestBody.Sex}}</p>
+<p><b>DOB :</b>{{this.requestBody.DOB}}</p>
+<p><b>Address :</b>{{this.requestBody.address}}</p>
 
 
           </div>
       </div>
 </div>
 
-<div class="col-md-4">
-<div class="panel panel-primary">
-        <div class="panel-heading">
-            <h3 class="panel-title">photo</h3>
-        </div>
-        <div class="panel-body">
 
-          <a href="#" class="pop">
-              <img src="/uploaded/{{doc.photocard}}" style="width: 400px; height: 264px;" class="img-responsive">
-          </a>
+ <div class="col-md-4">
+  <div class="panel panel-primary">
+          <div class="panel-heading" style="background-color: #e97319">
+              <h3 class="panel-title">Visit details</h3>
+          </div>
+          <div class="panel-body">
 
+           <p><b>Visit Type :</b>{{this.requestBody.profile.visit_type}}</p>
 
-
-        </div>
-    </div>
-</div>
+           <p><b>Visit date :</b>{{this.requestBody.profile.stay_duration}}</p>
+           <p><b>Visit date :</b>{{this.requestBody.profile.visit_Date}}</p>
 
 
-  <div class="modal fade" id="imagemodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" data-dismiss="modal">
-      <div class="modal-content"  >
-        <div class="modal-body">
-        	<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-          <img src="" class="imagepreview" style="width: 100%;" >
-        </div>
-        <div class="modal-footer">
-            <div class="col-xs-12">
-                 <p class="text-left"></p>
-
-            </div>
-
-        </div>
 
 
+
+
+          </div>
       </div>
-    </div>
-  </div>
+
 
 </div>
+</div>
+{{/doc}}

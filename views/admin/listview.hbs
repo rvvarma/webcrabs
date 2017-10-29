@@ -1,24 +1,30 @@
-<div class="bs-example">
-    <table class="table">
+
+<table id="myTable" class="table table-striped" >
         <thead>
-            <tr>
+          <tr>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>SEX</th>
+             <th>VisitType</th>
+            <th>Address</th>
+             <th>View Profile</th>
 
-                <th> Name</th>
-                <th>Adhaar Number</th>
 
-                <th>Visit Time</th>
-            </tr>
+          </tr>
         </thead>
         <tbody>
-          {{#doc}}
-            <tr>
+        {{#doc}}
+          <tr>
+            <td>{{this.requestBody.name}}</td>
+             <td>{{this.requestBody.DOB}}</td>
+              <td>{{this.requestBody.Sex}}</td>
+              <td>{{this.requestBody.profile.visit_type}}</td>
+               <td>{{this.requestBody.address}}</td>
+                <td><a href="/viewprofile/{{this._id}}">Yes</a></td>
 
-                <td>{{this.person}}</td>
-                  <td>{{this.adhaar}}</td>
-                <td>{{this.date}}</td>
-                <td><a href="/viewprofile/{{this._id}}">View Profile</a></td>
-        </tr>
-        {{/doc}}
+          </tr>
+{{/doc}}
         </tbody>
-    </table>
-</div>
+      </table>
+	  </div>
+
